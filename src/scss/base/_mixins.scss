@@ -2,22 +2,22 @@
 
 /** Media Queries **/
 @mixin telefono {
-    @media (min-width: v.$telefono) {
+    @media (width <= v.$telefono) {
         @content;
     }
 }
 @mixin tablet {
-    @media (min-width: v.$tablet) {
+    @media (width <= v.$tablet) {
         @content;
     }
 }
 @mixin desktop {
-    @media (min-width: v.$desktop) {
+    @media (width <= v.$desktop) {
         @content;
     }
 }
 @mixin xl_desktop {
-    @media (min-width: v.$xl_desktop) {
+    @media (width <= v.$xl_desktop) {
         @content;
     }
 }
@@ -45,4 +45,26 @@
     display: grid;
     gap: $espaciado;
     grid-template-columns: repeat($columnas, 1fr);
+}
+
+@mixin contenedor {
+    width: min(95%, 120rem);
+    margin: 0 auto;
+}
+
+@mixin contenedor-sm {
+    width: min(95%, 60rem);
+    margin: 0 auto;
+}
+
+@mixin headings {
+    font-family: v.$fuente_principal;
+    font-weight: v.$black;
+    margin: 2rem 0;
+}
+
+@mixin nombre-pagina {
+    @include headings;
+    margin: 6rem 0 3rem 0;
+    text-align: center;
 }
