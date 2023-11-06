@@ -98,30 +98,49 @@
             font-style: normal;
             text-rendering: auto;
             -webkit-font-smoothing: antialiased;
-            font-family: "Font Awesome 6 Brands";
+            font-family: 'Font Awesome 6 Brands';
         }
 
-        &[href*="https://facebook.com"]::before {
-            content: "\f39e";
+        &[href*="https://facebook.com"]::before
+        {
+            content: '\f39e';
         }
-        &[href*="https://github.com"]::before {
-            content: "\f09b";
+        &[href*="https://github.com"]::before
+        {
+            content: '\f09b';
         }
-        &[href*="https://tiktok.com"]::before {
-            content: "\e07b";
+        &[href*="https://tiktok.com"]::before
+        {
+            content: '\e07b';
         }
-        &[href*="https://instagram.com"]::before {
-            content: "\f16d";
+        &[href*="https://instagram.com"]::before
+        {
+            content: '\f16d';
         }
-        &[href*="https://youtube.com"]::before {
-            content: "\f167";
+        &[href*="https://youtube.com"]::before
+        {
+            content: '\f167';
         }
-        &[href*="https://twitter.com"]::before {
-            content: "\f099";
+        &[href*="https://twitter.com"]::before
+        {
+            content: '\f099';
         }
     }
 
     &__ocultar {
         display: none;
+    }
+}
+
+@mixin enlace {
+    all: unset;
+    color: v.$blanco;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    font-weight: v.$bold;
+
+    &:hover {
+        color: v.$azul;
+        cursor: pointer;
     }
 }
