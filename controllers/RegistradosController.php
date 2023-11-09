@@ -8,6 +8,8 @@ class RegistradosController
 {
     public static function index(Router $router)
     {
+        isAuth();
+
         $router->render('admin/registrados/index', [
             "titulo" => "Usuarios Registrados"
         ]);

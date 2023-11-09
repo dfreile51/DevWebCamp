@@ -8,6 +8,8 @@ class DashboardController
 {
     public static function index(Router $router)
     {
+        isAuth();
+
         $router->render('admin/dashboard/index', [
             "titulo" => "Panel de Administración"
         ]);

@@ -10,8 +10,13 @@ class AuthController
 {
     public static function login(Router $router)
     {
-
         $alertas = [];
+        $mensaje = $_GET["mensaje"] ?? null;
+
+        if ($mensaje) {
+            $datos = mensajeAlerta($mensaje, "password");
+            $alertas = Usuario::setAlerta($datos["tipo"], $datos["mensaje"]);
+        }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -29,11 +34,12 @@ class AuthController
                     if (password_verify($_POST['password'], $usuario->password)) {
 
                         // Iniciar la sesión
-                        session_start();
+                        checkSession();
                         $_SESSION['id'] = $usuario->id;
                         $_SESSION['nombre'] = $usuario->nombre;
                         $_SESSION['apellido'] = $usuario->apellido;
                         $_SESSION['email'] = $usuario->email;
+                        $_SESSION['login'] = true;
                         $_SESSION['admin'] = $usuario->admin ?? null;
 
                         // Redirección
@@ -202,7 +208,7 @@ class AuthController
 
                 // Redireccionar
                 if ($resultado) {
-                    header('Location: /login');
+                    header('Location: /login?mensaje=2');
                 }
             }
         }
