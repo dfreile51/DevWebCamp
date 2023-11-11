@@ -8,7 +8,6 @@ class EventosController
 {
     public static function index(Router $router)
     {
-        isAuth();
 
         $router->render('admin/eventos/index', [
             "titulo" => "Conferencias y Workshops"

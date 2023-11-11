@@ -58,9 +58,14 @@ function checkSession(): void
 }
 
 // Comprueba si el usuario a iniciado sesión, si no lo está, lo redirecciona a la página de inicio
-function isAuth(): void
+function isAuth(): bool
 {
-    if (!isset($_SESSION['login'])) {
-        header('Location: /');
-    }
+    session_start();
+    return isset($_SESSION["nombre"]) && !empty($_SESSION);
+}
+
+function isAdmin(): bool
+{
+    session_start();
+    return isset($_SESSION["admin"]) && !empty($_SESSION["admin"]);
 }
