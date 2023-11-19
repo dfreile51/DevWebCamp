@@ -156,6 +156,14 @@ class ActiveRecord
         return array_shift($resultado);
     }
 
+    // SQL para Consultas Avanzadas.
+    public static function SQL($consulta)
+    {
+        $query = $consulta;
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
     // Busqueda Where con multiples opciones
     public static function whereArray($array = [])
     {

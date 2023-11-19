@@ -9,8 +9,24 @@
         const ponenteHidden = document.querySelector("[name='ponente_id']");
 
         obtenerPonentes();
-
         ponentesInput.addEventListener("input", buscarPonentes);
+
+        if (ponenteHidden.value) {
+            (async () => {
+                const ponente = await obtenerPonente(ponenteHidden.value);
+                const { nombre, apellido } = ponente;
+
+                // Insertar en el HTML
+                const ponenteDOM = document.createElement("LI");
+                ponenteDOM.classList.add(
+                    "listado-ponentes__ponente",
+                    "listado-ponentes__ponente--seleccionado"
+                );
+                ponenteDOM.textContent = `${nombre} ${apellido}`;
+
+                listadoPonentes.appendChild(ponenteDOM);
+            })();
+        }
 
         /* 
             Obtiene todos los ponentes de la BD
@@ -19,12 +35,18 @@
             const url = `${location.origin}/api/ponentes`;
             const respuesta = await fetch(url);
             const resultado = await respuesta.json();
-
             formatearPonentes(resultado);
         }
 
-        /* 
+        async function obtenerPonente(id) {
+            const url = `${location.origin}/api/ponente?id=${id}`;
+            const respuesta = await fetch(url);
+            const resultado = await respuesta.json();
+            return resultado;
+        }
 
+        /* 
+            Devulve un objeto con la informacion del ponente
         */
         function formatearPonentes(arrayPonentes = []) {
             ponentes = arrayPonentes.map(ponente => {
@@ -87,14 +109,15 @@
             const ponente = e.target;
 
             // Remover la clase previa
-            const ponentePrevio = document.querySelector(".listado-ponentes__ponente--seleccionado");
+            const ponentePrevio = document.querySelector(
+                ".listado-ponentes__ponente--seleccionado"
+            );
             if (ponentePrevio) {
                 ponentePrevio.classList.remove();
             }
 
             ponente.classList.add("listado-ponentes__ponente--seleccionado");
             ponenteHidden.value = ponente.dataset.ponenteId;
-
         }
     }
 })();

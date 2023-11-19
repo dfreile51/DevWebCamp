@@ -30,7 +30,6 @@ class PonentesController
 
         $alertas = [];
         $mensaje = $_GET["mensaje"] ?? null;
-
         if ($mensaje) {
             $datos = mensajeAlerta($mensaje, "ponente");
             Ponente::setAlerta($datos["tipo"], $datos["mensaje"]);
