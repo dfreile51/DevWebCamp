@@ -10,6 +10,8 @@ class AuthController
 {
     public static function login(Router $router)
     {
+        if (isAuth()) header("Location: /");
+
         $alertas = [];
         $mensaje = $_GET["mensaje"] ?? null;
 
@@ -48,7 +50,6 @@ class AuthController
                         } else {
                             header("Location: /finalizar-registro");
                         }
-
                     } else {
                         Usuario::setAlerta('error', 'Password Incorrecto');
                     }
@@ -76,6 +77,8 @@ class AuthController
 
     public static function registro(Router $router)
     {
+        if (isAuth()) header("Location: /");
+
         $alertas = [];
         $usuario = new Usuario;
 
@@ -126,6 +129,8 @@ class AuthController
 
     public static function olvide(Router $router)
     {
+        if (isAuth()) header("Location: /");
+
         $alertas = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -172,6 +177,7 @@ class AuthController
 
     public static function reestablecer(Router $router)
     {
+        if (isAuth()) header("Location: /");
 
         $token = s($_GET['token']);
 
@@ -187,9 +193,7 @@ class AuthController
             $token_valido = false;
         }
 
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
             // Añadir el nuevo password
             $usuario->sincronizar($_POST);
 
@@ -225,6 +229,7 @@ class AuthController
 
     public static function mensaje(Router $router)
     {
+        if (isAuth()) header("Location: /");
 
         $router->render('auth/mensaje', [
             'titulo' => 'Cuenta Creada Exitosamente'
@@ -233,6 +238,7 @@ class AuthController
 
     public static function confirmar(Router $router)
     {
+        if (isAuth()) header("Location: /");
 
         $token = s($_GET['token']);
 
@@ -255,8 +261,6 @@ class AuthController
 
             Usuario::setAlerta('exito', 'Cuenta Comprobada Correctamente');
         }
-
-
 
         $router->render('auth/confirmar', [
             'titulo' => 'Confirma tu cuenta DevWebcamp',

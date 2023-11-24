@@ -60,12 +60,16 @@ function checkSession(): void
 // Comprueba si el usuario a iniciado sesión, si no lo está, lo redirecciona a la página de inicio
 function isAuth(): bool
 {
-    session_start();
+    if (!isset($_SESSION)) {
+        session_start();
+    }
     return isset($_SESSION["nombre"]) && !empty($_SESSION);
 }
 
 function isAdmin(): bool
 {
-    session_start();
+    if (!isset($_SESSION)) {
+        session_start();
+    }
     return isset($_SESSION["admin"]) && !empty($_SESSION["admin"]);
 }
