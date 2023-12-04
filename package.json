@@ -31,7 +31,6 @@
     "terser": "^5.14.2"
   },
   "dependencies": {
-    "sharp": "^0.32.6",
     "swiper": "^11.0.5",
     "webpack-stream": "^7.0.0"
   }

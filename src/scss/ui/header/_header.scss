@@ -1,15 +1,17 @@
-@use 'base/variables' as v;
-@use 'base/mixins' as m;
+@use "base/variables" as v;
+@use "base/mixins" as m;
 
 .header {
     min-height: 60rem;
     background-image: url(../img/grafico.svg), url(../img/grafico.svg),
         linear-gradient(to right, rgba(v.$negro, 1), rgba(v.$negro, 0.5)),
-        url(../img/header.jpg),
+        url(../img/header.jpg);
+    background-image: url(../img/grafico.svg), url(../img/grafico.svg),
+        linear-gradient(to right, rgba(v.$negro, 1), rgba(v.$negro, 0.5)),
         image-set(
-            url(../img/header.avif) 1x,
-            url(../img/header.webp) 1x,
-            url(../img/header.jpg) 1x
+            url(../img/header.avif) type("image/avif") 1x,
+            url(../img/header.webp) type("image/webp") 1x,
+            url(../img/header.jpg) type("image/jpg") 1x
         );
     background-repeat: no-repeat;
     background-size: 400px, 400px, cover, cover; // grafico.svg, grafico.svg, linear-gradient, image-set
@@ -38,7 +40,7 @@
     }
 
     &__submit {
-        @extend .header__enlace
+        @extend .header__enlace;
     }
 
     &__contenido {
